@@ -444,7 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (sentimentNote && !st.positive && !st.negative) {
       sentimentNote.textContent =
-        "// sentiment analysis not available (text-only casts required)";
+        "[Sentiment analysis not available (text-only casts required)]";
     }
 
     // Top casts
