@@ -12,7 +12,7 @@
     "name": "Auditor",
     "homeUrl": "https://the-auditor.onrender.com",
     "iconUrl": "https://the-auditor.onrender.com/assets/icon.png",
-    "splashImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
+    "splashImageUrl": "https://the-auditor.onrender.com/assets/splash.png",
     "splashBackgroundColor": "#000000",
     "subtitle": "Farcaster growth terminal",
     "description": "Analyze your Farcaster and Base account and get posting recommendations.",
