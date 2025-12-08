@@ -23,6 +23,7 @@
 />
 
 
+
   <link rel="stylesheet" href="style.css" />
   <link
     href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap"
@@ -449,33 +450,24 @@
 
   <!-- Farcaster Mini App SDK: hide splash when UI is ready -->
    <!-- Farcaster Mini App SDK: hide splash when UI is ready -->
-<!-- Farcaster Mini App SDK (CDN version – required for Base App) -->
-<script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/index.min.js"></script>
+  <!-- Farcaster / Base Mini App SDK: hide splash when UI is ready -->
+  <script type="module">
+    import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
 
-<script>
-  // Tell the Base / Farcaster host that the mini app UI is ready
-  window.addEventListener("load", async () => {
-    try {
-      // নতুন SDK (window.sdk) + পুরনো alias (frame.sdk) – দুটোই সাপোর্ট করছি
-      const miniAppSdk = window.sdk || (window.frame && window.frame.sdk);
-
-      if (miniAppSdk && miniAppSdk.actions && miniAppSdk.actions.ready) {
-        await miniAppSdk.actions.ready();
+    // UI fully loaded হলে host-কে জানাও
+    window.addEventListener("load", async () => {
+      try {
+        await sdk.actions.ready();
         console.log("Mini app READY fired ✔");
-      } else {
-        console.log(
-          "Mini app SDK not available on window.sdk or frame.sdk ❌"
-        );
+      } catch (err) {
+        console.error("Error calling sdk.actions.ready()", err);
       }
-    } catch (err) {
-      console.error("Error calling mini app ready()", err);
-    }
-  });
-</script>
+    });
+  </script>
 
-<!-- your existing app script -->
-<script src="script.js"></script>
-
-  </body>
+  <!-- your existing app script -->
+  <script src="script.js"></script>
+</body>
 </html>
+
 
