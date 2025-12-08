@@ -7,20 +7,21 @@
 
   <!-- Farcaster / Base mini app meta -->
   <meta
-    name="fc:miniapp"
-    content='{
-      "version": "next",
-      "imageUrl": "https://YOUR_DOMAIN_HERE/assets/hero.png",
-      "button": {
-        "title": "Open The Auditor",
-        "action": {
-          "type": "launch_miniapp",
-          "name": "The Auditor",
-          "url": "https://YOUR_DOMAIN_HERE"
-        }
+  name="fc:miniapp"
+  content='{
+    "version": "next",
+    "imageUrl": "https://the-auditor.onrender.com/assets/hero.png",
+    "button": {
+      "title": "Open The Auditor",
+      "action": {
+        "type": "launch_miniapp",
+        "name": "The Auditor",
+        "url": "https://the-auditor.onrender.com"
       }
-    }'
-  />
+    }
+  }'
+/>
+
 
   <link rel="stylesheet" href="style.css" />
   <link
@@ -447,27 +448,34 @@
   </main>
 
   <!-- Farcaster Mini App SDK: hide splash when UI is ready -->
-        <!-- Farcaster Mini App SDK (CDN version – required for Base App) -->
-        <!-- Farcaster Mini App SDK (CDN version – required for Base App) -->
-    <script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/index.min.js"></script>
+   <!-- Farcaster Mini App SDK: hide splash when UI is ready -->
+<!-- Farcaster Mini App SDK (CDN version – required for Base App) -->
+<script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/index.min.js"></script>
 
-    <script>
-      window.addEventListener("load", async () => {
-        try {
-          if (window.frame?.sdk?.actions?.ready) {
-            await frame.sdk.actions.ready();
-            console.log("MiniApp READY fired ✔");
-          } else {
-            console.log("SDK not available yet ❌");
-          }
-        } catch (err) {
-          console.error("Error calling READY()", err);
-        }
-      });
-    </script>
+<script>
+  // Tell the Base / Farcaster host that the mini app UI is ready
+  window.addEventListener("load", async () => {
+    try {
+      // নতুন SDK (window.sdk) + পুরনো alias (frame.sdk) – দুটোই সাপোর্ট করছি
+      const miniAppSdk = window.sdk || (window.frame && window.frame.sdk);
 
-    <!-- your existing app script -->
-    <script src="script.js"></script>
+      if (miniAppSdk && miniAppSdk.actions && miniAppSdk.actions.ready) {
+        await miniAppSdk.actions.ready();
+        console.log("Mini app READY fired ✔");
+      } else {
+        console.log(
+          "Mini app SDK not available on window.sdk or frame.sdk ❌"
+        );
+      }
+    } catch (err) {
+      console.error("Error calling mini app ready()", err);
+    }
+  });
+</script>
+
+<!-- your existing app script -->
+<script src="script.js"></script>
+
   </body>
 </html>
 
