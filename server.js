@@ -922,9 +922,10 @@ app.get("/api/audit", async (req, res) => {
 
     // 2) Fetch last ~100 casts then filter to 7 days
     const castsResp = await neynarGet("/v2/farcaster/feed/user/casts", {
-      fid,
-      : 50limit,
-    });
+  fid,
+  limit: 50, // <= FIXED
+});
+
     const allCasts = castsResp.casts || [];
     const casts = filterRecentCasts(allCasts, WINDOW_DAYS); // << only last 7 days
 
