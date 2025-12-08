@@ -90,7 +90,7 @@
     <!-- DASHBOARD -->
     <div id="dashboard" class="dashboard hidden">
       <!-- WINDOW SUMMARY -->
-      <p class="window-summary" id="window_summary">Last 7 days · 0 casts analyzed</p>
+      <p class="window-summary" id="window_summary">Last 7 days · 0 posts analyzed</p>
 
       <!-- TOP STATS -->
       <div class="stats-grid">
@@ -115,7 +115,7 @@
         <div class="stat-card neynar-card-main">
           <span class="label">INFLUENCE_SCORE (0–10)</span>
           <span class="value" id="disp_score">0.0</span>
-          <span class="stat-hint">[Based on likes + recasts + replies (last 7 days)]</span>
+          <span class="stat-hint">[Based on likes + repost + replies (last 7 days)]</span>
         </div>
 
         <div class="stat-card">
@@ -169,7 +169,7 @@
             <div class="card-title">Posting Consistency</div>
             <div class="card-body">
               <div class="metric-row">
-                <span class="metric-label">Avg casts / week:</span>
+                <span class="metric-label">Avg posts / week:</span>
                 <span class="metric-value" id="consistency_per_week">--</span>
               </div>
               <div class="metric-row">
@@ -202,7 +202,7 @@
                   <tr>
                     <th>TYPE</th>
                     <th>AVG ENGAGEMENT</th>
-                    <th>CASTS</th>
+                    <th>POSTS</th>
                   </tr>
                 </thead>
                 <tbody id="content_type_body"></tbody>
@@ -215,11 +215,11 @@
             <div class="card-title">Sentiment Trend</div>
             <div class="card-body">
               <div class="metric-row">
-                <span class="metric-label">Positive casts:</span>
+                <span class="metric-label">Positive posts:</span>
                 <span class="metric-value" id="sentiment_pos">--</span>
               </div>
               <div class="metric-row">
-                <span class="metric-label">Negative casts:</span>
+                <span class="metric-label">Negative posts:</span>
                 <span class="metric-value" id="sentiment_neg">--</span>
               </div>
               <div class="metric-row">
@@ -237,7 +237,7 @@
         <h2 class="section-title">>> PERFORMANCE_DETAILS</h2>
         <div class="analysis-grid">
           <div class="analysis-card wide-card">
-            <div class="card-title">Top Performing Casts (Last 7 Days)</div>
+            <div class="card-title">Top Performing Posts (Last 7 Days)</div>
             <div class="card-body">
               <div class="table-scroll">
                 <table class="hack-table small-table">
@@ -254,7 +254,7 @@
                   <tbody id="top_casts_body"></tbody>
                 </table>
               </div>
-              <p class="subnote" id="top_casts_note">// which casts actually hit your audience (7d)</p>
+              <p class="subnote" id="top_casts_note">[Which posts actually hit your audience (7d)]</p>
             </div>
           </div>
 
@@ -299,7 +299,7 @@
                 <span class="metric-label">Fastest velocity:</span>
                 <span class="metric-value" id="velocity_best_score">--</span>
               </div>
-              <p class="subnote">[How quickly your casts pick up engagement]</p>
+              <p class="subnote">[How quickly your posts pick up engagement]</p>
             </div>
           </div>
 
@@ -311,14 +311,14 @@
                   <thead>
                     <tr>
                       <th>AGE BUCKET</th>
-                      <th>CASTS</th>
+                      <th>POSTS</th>
                       <th>AVG ENG.</th>
                     </tr>
                   </thead>
                   <tbody id="lifecycle_body"></tbody>
                 </table>
               </div>
-              <p class="subnote">[Where your casts earn most of their engagement]</p>
+              <p class="subnote">[Where your posts earn most of their engagement]</p>
             </div>
           </div>
         </div>
@@ -357,7 +357,7 @@
                   <thead>
                     <tr>
                       <th>PATTERN</th>
-                      <th>CASTS</th>
+                      <th>POSTS</th>
                       <th>AVG ENG.</th>
                     </tr>
                   </thead>
@@ -404,7 +404,7 @@
                   <tbody id="viral_body"></tbody>
                 </table>
               </div>
-              <p class="subnote" id="viral_note">// casts that are moving faster than your baseline</p>
+              <p class="subnote" id="viral_note">[Posts that are moving faster than your baseline]</p>
             </div>
           </div>
 

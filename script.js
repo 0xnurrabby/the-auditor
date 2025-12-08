@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (windowSummaryEl && payload.window) {
       const d = payload.window.days || 7;
       const c = payload.window.castsConsidered || 0;
-      windowSummaryEl.textContent = `Last ${d} days · ${c} casts analyzed`;
+      windowSummaryEl.textContent = `Last ${d} days · ${c} casts analyzed [Remember cast and post same thing]`;
     }
 
     // basic stats
