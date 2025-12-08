@@ -307,7 +307,7 @@ async function computeReplyEngagement(fid) {
   try {
     const resp = await neynarGet(
       "/v2/farcaster/feed/user/replies_and_recasts",
-      { fid, limit: 100 }
+      { fid, limit: 50 }
     );
 
     const casts = resp.casts || [];
@@ -923,7 +923,7 @@ app.get("/api/audit", async (req, res) => {
     // 2) Fetch last ~100 casts then filter to 7 days
     const castsResp = await neynarGet("/v2/farcaster/feed/user/casts", {
       fid,
-      : 100limit,
+      : 50limit,
     });
     const allCasts = castsResp.casts || [];
     const casts = filterRecentCasts(allCasts, WINDOW_DAYS); // << only last 7 days
