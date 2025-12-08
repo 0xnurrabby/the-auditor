@@ -195,8 +195,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- network ---
   async function handleAnalyze() {
     if (!usernameInput) return;
-    const raw = usernameInput.value.trim();
+
+    // ইনপুট থেকে space কেটে, @ থাকলে সরিয়ে, সব lowercase করি
+    let raw = usernameInput.value.trim();
     if (!raw) return;
+
+    if (raw.startsWith("@")) {
+      raw = raw.slice(1);
+    }
+    raw = raw.toLowerCase();
 
     resetDashboard();
     setLoading(true);

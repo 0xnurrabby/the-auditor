@@ -871,12 +871,20 @@ function computeWeeklyDigest({
 // ---------- MAIN ENDPOINT ----------
 
 app.get("/api/audit", async (req, res) => {
-  const raw = (req.query.username || "").toString().trim();
-  if (!raw) {
+  const original = (req.query.username || "").toString().trim();
+  if (!original) {
     return res.status(400).json({ error: "username query param required" });
   }
 
+  // username normalize: @ কেটে ছোট হাতের করি
+  let raw = original;
+  if (raw.startsWith("@")) {
+    raw = raw.slice(1);
+  }
+  raw = raw.toLowerCase();
+
   const isNumericFid = /^\d+$/.test(raw);
+
 
   try {
     // 1) Resolve user
@@ -915,7 +923,7 @@ app.get("/api/audit", async (req, res) => {
     // 2) Fetch last ~100 casts then filter to 7 days
     const castsResp = await neynarGet("/v2/farcaster/feed/user/casts", {
       fid,
-      limit: 100,
+      : 100limit,
     });
     const allCasts = castsResp.casts || [];
     const casts = filterRecentCasts(allCasts, WINDOW_DAYS); // << only last 7 days
