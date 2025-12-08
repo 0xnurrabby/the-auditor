@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // --- Intro animation ---
   const introText =
-    "Initializing Farcaster Protocol... // Tracking Influence... // Ready.";
+    "Initializing Farcaster Protocol... Tracking Influence... Ready.";
   const typewriterElement = document.getElementById("typewriter");
   let i = 0;
 
@@ -110,45 +110,45 @@ document.addEventListener("DOMContentLoaded", () => {
     if (bestTimeWeekday) bestTimeWeekday.textContent = "--";
     if (bestTimeNote)
       bestTimeNote.textContent =
-        "// based on engagement from last 7 days of casts";
+        "[based on engagement from last 7 days of posts]";
 
     if (audienceEngaged) audienceEngaged.textContent = "--";
     if (audienceGhost) audienceGhost.textContent = "--";
     if (audienceNote)
       audienceNote.textContent =
-        "// rough split of active vs silent followers (7-day window)";
+        "[Rough split of active vs silent followers (7-day window)]";
 
     if (consPerWeek) consPerWeek.textContent = "--";
     if (consStreak) consStreak.textContent = "--";
     if (consistencyNote)
       consistencyNote.textContent =
-        "// more consistent posting → better growth";
+        "[More consistent posting → better growth]";
 
     if (roadmapScoreValue) roadmapScoreValue.textContent = "--";
     if (roadmapScoreNote)
-      roadmapScoreNote.textContent = "// consolidated growth metric";
+      roadmapScoreNote.textContent = "[Consolidated growth metric]";
 
     if (contentTypeBody) contentTypeBody.innerHTML = "";
     if (contentTypeNote)
       contentTypeNote.textContent =
-        "// which format performs best for you (7 days)";
+        "[Which format performs best for you (7 days)]";
 
     if (sentimentPos) sentimentPos.textContent = "--";
     if (sentimentNeg) sentimentNeg.textContent = "--";
     if (sentimentCrypto) sentimentCrypto.textContent = "--";
     if (sentimentNote)
       sentimentNote.textContent =
-        "// simple keyword-based mood tracker (7 days)";
+        "[Simple keyword-based mood tracker (7 days)]";
 
     if (topCastsBody) topCastsBody.innerHTML = "";
     if (topCastsNote)
       topCastsNote.textContent =
-        "// which casts actually hit your audience";
+        "[Which casts actually hit your audience]";
 
     if (replyEngBody) replyEngBody.innerHTML = "";
     if (replyNote)
       replyNote.textContent =
-        "// who shows up most in your conversations";
+        "[Who shows up most in your conversations]";
 
     if (growthTipsList) growthTipsList.innerHTML = "";
 
@@ -162,14 +162,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (keywordBody) keywordBody.innerHTML = "";
     if (keywordNote)
       keywordNote.textContent =
-        "// needs repeated topics/hashtags in this 7-day window";
+        "[Needs repeated topics/hashtags in this 7-day window]";
 
     if (lifecycleBody) lifecycleBody.innerHTML = "";
 
     if (viralBody) viralBody.innerHTML = "";
     if (viralNote)
       viralNote.textContent =
-        "// viral candidates: fast engagement vs your normal baseline";
+        "[Viral candidates: fast engagement vs your normal baseline]";
 
     if (freqActualEl) freqActualEl.textContent = "--";
     if (freqRecoEl) freqRecoEl.textContent = "--";

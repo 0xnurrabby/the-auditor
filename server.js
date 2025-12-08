@@ -728,7 +728,7 @@ function computeFrequencyRecommendation(casts) {
     recommendedMin = 3;
     recommendedMax = 5;
     msg =
-      "You post a lot. Make sure performance doesn’t drop; consider consolidating into 3–5 standout casts per day.";
+      "[You post a lot. Make sure performance doesn’t drop; consider consolidating into 3–5 standout casts per day.]";
   }
 
   return {
