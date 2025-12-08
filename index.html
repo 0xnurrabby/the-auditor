@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Auditor // Farcaster Mini App</title>
+
+  <!-- Farcaster / Base mini app meta -->
+  <meta
+    name="fc:miniapp"
+    content='{
+      "version": "next",
+      "imageUrl": "https://YOUR_DOMAIN_HERE/assets/hero.png",
+      "button": {
+        "title": "Open The Auditor",
+        "action": {
+          "type": "launch_miniapp",
+          "name": "The Auditor",
+          "url": "https://YOUR_DOMAIN_HERE"
+        }
+      }
+    }'
+  />
+
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <main class="main-container">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo">$ The_auditor.exe</div>
+
+      <!-- small red flip badge -->
+      <div class="version-box" onclick="this.classList.toggle('flip')">
+        <div class="version-inner">
+          <div class="version-front">V1.0[ONLINE]</div>
+          <div class="version-back">
+            <span class="dev-name">By NurRabby</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- TYPEWRITER INTRO -->
+    <section class="terminal-intro">
+      <div id="typewriter" class="typewriter-text"></div>
+    </section>
+
+    <!-- SEARCH / EXECUTE BAR -->
+    <section class="search-box">
+      <div class="input-wrapper">
+        <span class="prompt">user@auditor:~$</span>
+
+        <input
+          type="text"
+          id="usernameInput"
+          placeholder="username_or_fid"
+          autocomplete="off"
+        />
+
+        <button id="analyzeButton" class="btn-hack">EXECUTE</button>
+      </div>
+
+      <p class="hint-text">
+        // Enter FID or Username (e.g. nur, nurrabby.base.eth, nurrabby.farcaster.eth, 1407742). [Insure that's not more than 20 char]
+      </p>
+    </section>
+
+    <!-- LOADING TEXT -->
+    <div id="loadingScreen" class="hidden">
+      <p class="blink">> ESTABLISHING CONNECTION TO HUB...</p>
+      <p class="blink delay-1">> FETCHING SOCIAL GRAPH & CAST LOGS...</p>
+      <p class="blink delay-2">> CALCULATING ENGAGEMENT VECTORS (7d)...</p>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="dashboard hidden">
+      <!-- WINDOW SUMMARY -->
+      <p class="window-summary" id="window_summary">Last 7 days · 0 casts analyzed</p>
+
+      <!-- TOP STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="label">TARGET_ID</span>
+          <span class="value" id="disp_username">--</span>
+          <span class="stat-hint">// farcaster handle (short) + fid</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="label">FOLLOWERS</span>
+          <span class="value" id="disp_followers">0</span>
+          <span class="stat-hint">// accounts following this profile</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="label">FOLLOWING</span>
+          <span class="value" id="disp_following">0</span>
+          <span class="stat-hint">// accounts this profile follows</span>
+        </div>
+
+        <div class="stat-card neynar-card-main">
+          <span class="label">INFLUENCE_SCORE (0–10)</span>
+          <span class="value" id="disp_score">0.0</span>
+          <span class="stat-hint">// based on likes + recasts + replies (last 7 days)</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="label">ENGAGEMENT_RATE</span>
+          <span class="value" id="disp_eng">0%</span>
+          <span class="stat-hint">// est. % of followers who interact with each cast (7d)</span>
+        </div>
+
+        <div class="stat-card neynar-card">
+          <span class="label">NEYNAR_SCORE (0–1.0)</span>
+          <span class="value" id="disp_neynar_score">--</span>
+          <span class="stat-hint">// Neynar user quality score</span>
+        </div>
+      </div>
+
+      <!-- ANALYTICS_OVERVIEW -->
+      <section class="analytics-section">
+        <h2 class="section-title">>> ANALYTICS_OVERVIEW</h2>
+        <div class="analysis-grid">
+          <div class="analysis-card">
+            <div class="card-title">Best Time to Post</div>
+            <div class="card-body">
+              <div class="metric-row">
+                <span class="metric-label">Peak hour:</span>
+                <span class="metric-value" id="best_time_hour">--</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Peak weekday:</span>
+                <span class="metric-value" id="best_time_weekday">--</span>
+              </div>
+              <p class="subnote" id="best_time_note">// based on engagement from last 7 days</p>
+            </div>
+          </div>
+
+          <div class="analysis-card">
+            <div class="card-title">Audience Health</div>
+            <div class="card-body">
+              <div class="metric-row">
+                <span class="metric-label">Engaged followers:</span>
+                <span class="metric-value" id="audience_engaged">--</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Ghost / inactive:</span>
+                <span class="metric-value" id="audience_ghost">--</span>
+              </div>
+              <p class="subnote" id="audience_note">// rough split of active vs silent followers (7d)</p>
+            </div>
+          </div>
+
+          <div class="analysis-card">
+            <div class="card-title">Posting Consistency</div>
+            <div class="card-body">
+              <div class="metric-row">
+                <span class="metric-label">Avg casts / week:</span>
+                <span class="metric-value" id="consistency_per_week">--</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Longest streak:</span>
+                <span class="metric-value" id="consistency_streak">--</span>
+              </div>
+              <p class="subnote" id="consistency_note">// more consistent posting → better growth</p>
+            </div>
+          </div>
+
+          <div class="analysis-card">
+            <div class="card-title">Roadmap Score</div>
+            <div class="card-body">
+              <div class="roadmap-score-pill" id="roadmap_score_value">--</div>
+              <p class="subnote" id="roadmap_score_note">// consolidated growth metric (7d)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTENT_PATTERNS -->
+      <section class="analytics-section">
+        <h2 class="section-title">>> CONTENT_PATTERNS</h2>
+        <div class="analysis-grid">
+          <div class="analysis-card">
+            <div class="card-title">Content Type Breakdown</div>
+            <div class="card-body">
+              <table class="hack-table small-table">
+                <thead>
+                  <tr>
+                    <th>TYPE</th>
+                    <th>AVG ENGAGEMENT</th>
+                    <th>CASTS</th>
+                  </tr>
+                </thead>
+                <tbody id="content_type_body"></tbody>
+              </table>
+              <p class="subnote" id="content_type_note">// which format performs best for you</p>
+            </div>
+          </div>
+
+          <div class="analysis-card">
+            <div class="card-title">Sentiment Trend</div>
+            <div class="card-body">
+              <div class="metric-row">
+                <span class="metric-label">Positive casts:</span>
+                <span class="metric-value" id="sentiment_pos">--</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Negative casts:</span>
+                <span class="metric-value" id="sentiment_neg">--</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Crypto / alpha mentions:</span>
+                <span class="metric-value" id="sentiment_crypto">--</span>
+              </div>
+              <p class="subnote" id="sentiment_note">// simple keyword-based mood tracker (7d)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERFORMANCE_DETAILS -->
+      <section class="analytics-section">
+        <h2 class="section-title">>> PERFORMANCE_DETAILS</h2>
+        <div class="analysis-grid">
+          <div class="analysis-card wide-card">
+            <div class="card-title">Top Performing Casts (Last 7 Days)</div>
+            <div class="card-body">
+              <div class="table-scroll">
+                <table class="hack-table small-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>SNIPPET</th>
+                      <th>LIKES</th>
+                      <th>REPLIES</th>
+                      <th>RECASTS</th>
+                      <th>TOTAL</th>
+                    </tr>
+                  </thead>
+                  <tbody id="top_casts_body"></tbody>
+                </table>
+              </div>
+              <p class="subnote" id="top_casts_note">// which casts actually hit your audience (7d)</p>
+            </div>
+          </div>
+
+          <div class="analysis-card">
+            <div class="card-title">Reply Engagement (Who you talk to)</div>
+            <div class="card-body">
+              <div class="table-scroll">
+                <table class="hack-table small-table">
+                  <thead>
+                    <tr>
+                      <th>USER</th>
+                      <th>REPLIES</th>
+                      <th>RECASTS</th>
+                      <th>QUOTES</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reply_engagement_body"></tbody>
+                </table>
+              </div>
+              <p class="subnote" id="reply_note">// who shows up most in your conversations (7d)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VELOCITY_AND_LIFECYCLE -->
+      <section class="analytics-section">
+        <h2 class="section-title">>> VELOCITY_AND_LIFECYCLE</h2>
+        <div class="analysis-grid">
+          <div class="analysis-card">
+            <div class="card-title">Engagement Velocity</div>
+            <div class="card-body">
+              <div class="metric-row">
+                <span class="metric-label">Avg velocity (eng/h):</span>
+                <span class="metric-value" id="velocity_avg">--</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Fastest cast snippet:</span>
+                <span class="metric-value metric-snippet" id="velocity_best_hook">--</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Fastest velocity:</span>
+                <span class="metric-value" id="velocity_best_score">--</span>
+              </div>
+              <p class="subnote">// how quickly your casts pick up engagement</p>
+            </div>
+          </div>
+
+          <div class="analysis-card">
+            <div class="card-title">Lifecycle Curve</div>
+            <div class="card-body">
+              <div class="table-scroll">
+                <table class="hack-table small-table">
+                  <thead>
+                    <tr>
+                      <th>AGE BUCKET</th>
+                      <th>CASTS</th>
+                      <th>AVG ENG.</th>
+                    </tr>
+                  </thead>
+                  <tbody id="lifecycle_body"></tbody>
+                </table>
+              </div>
+              <p class="subnote">// where your casts earn most of their engagement</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOPICS_AND_HOOKS -->
+      <section class="analytics-section">
+        <h2 class="section-title">>> TOPICS_AND_HOOKS</h2>
+        <div class="analysis-grid">
+          <div class="analysis-card">
+            <div class="card-title">Keyword / Topic Performance</div>
+            <div class="card-body">
+              <div class="table-scroll">
+                <table class="hack-table small-table">
+                  <thead>
+                    <tr>
+                      <th>KEYWORD / TAG</th>
+                      <th>USES</th>
+                      <th>AVG ENG.</th>
+                      <th>TOTAL</th>
+                    </tr>
+                  </thead>
+                  <tbody id="keyword_body"></tbody>
+                </table>
+              </div>
+              <p class="subnote" id="keyword_note">// needs topics used 3+ times to show up</p>
+            </div>
+          </div>
+
+          <div class="analysis-card">
+            <div class="card-title">Hook Effectiveness</div>
+            <div class="card-body">
+              <div class="sub-card-title">Patterns</div>
+              <div class="table-scroll small-table-block">
+                <table class="hack-table small-table">
+                  <thead>
+                    <tr>
+                      <th>PATTERN</th>
+                      <th>CASTS</th>
+                      <th>AVG ENG.</th>
+                    </tr>
+                  </thead>
+                  <tbody id="hook_patterns_body"></tbody>
+                </table>
+              </div>
+
+              <div class="sub-card-title" style="margin-top: 10px;">Best Hooks</div>
+              <div class="table-scroll small-table-block">
+                <table class="hack-table small-table">
+                  <thead>
+                    <tr>
+                      <th>HOOK SNIPPET</th>
+                      <th>ENG.</th>
+                    </tr>
+                  </thead>
+                  <tbody id="hook_best_body"></tbody>
+                </table>
+              </div>
+
+              <p class="subnote">// first 10 words that drive the most response</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIRAL_LAB_AND_FREQUENCY -->
+      <section class="analytics-section">
+        <h2 class="section-title">>> VIRAL_LAB_AND_FREQUENCY</h2>
+        <div class="analysis-grid">
+          <div class="analysis-card wide-card">
+            <div class="card-title">Viral Candidates (7d)</div>
+            <div class="card-body">
+              <div class="table-scroll">
+                <table class="hack-table small-table">
+                  <thead>
+                    <tr>
+                      <th>SNIPPET</th>
+                      <th>TOTAL ENG.</th>
+                      <th>VELOCITY</th>
+                      <th>VIRAL SCORE</th>
+                    </tr>
+                  </thead>
+                  <tbody id="viral_body"></tbody>
+                </table>
+              </div>
+              <p class="subnote" id="viral_note">// casts that are moving faster than your baseline</p>
+            </div>
+          </div>
+
+          <div class="analysis-card">
+            <div class="card-title">Posting Frequency (Recommendation)</div>
+            <div class="card-body">
+              <div class="metric-row">
+                <span class="metric-label">Actual:</span>
+                <span class="metric-value" id="freq_actual">--</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Suggested range:</span>
+                <span class="metric-value" id="freq_reco">--</span>
+              </div>
+              <p class="subnote" id="freq_msg">// how often you should cast to grow</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GROWTH_SUGGESTIONS -->
+      <section class="analytics-section">
+        <h2 class="section-title">>> GROWTH_SUGGESTIONS</h2>
+        <div class="analysis-grid">
+          <div class="analysis-card wide-card">
+            <div class="card-title">Actionable Tips</div>
+            <div class="card-body">
+              <ul class="tips-list" id="growth_tips_list"></ul>
+              <p class="subnote">// simple rules – no AI hallucination, only data</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WEEKLY_DIGEST -->
+      <section class="analytics-section">
+        <h2 class="section-title">>> WEEKLY_DIGEST (AUTO REPORT)</h2>
+        <div class="analysis-grid">
+          <div class="analysis-card wide-card">
+            <div class="card-title">Summary for last 7 days</div>
+            <div class="card-body">
+              <ul class="tips-list" id="weekly_digest_list"></ul>
+              <p class="subnote">// read this once per day to track your arc</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Farcaster Mini App SDK: hide splash when UI is ready -->
+  <script type="module">
+    import { sdk } from "https://esm.sh/@farcaster/miniapp-sdk";
+
+    // সব resource load হওয়ার পর splash screen লুকাও
+    window.addEventListener("load", async () => {
+      try {
+        await sdk.actions.ready();
+      } catch (err) {
+        console.error("MiniApp SDK ready() failed", err);
+      }
+    });
+  </script>
+
+  <script src="script.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>

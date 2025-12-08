@@ -1,0 +1,14 @@
+{
+  "name": "farcaster-auditor",
+  "version": "1.1.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "node-fetch": "^2.7.0"
+  }
+}
