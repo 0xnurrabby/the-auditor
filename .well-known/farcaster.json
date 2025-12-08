@@ -1,3 +1,4 @@
+// .well-known/farcaster.json
 {
   "accountAssociation": {
     "header": "eyJmaWQiOi0xLCJ0eXBlIjoiYXV0aCIsImtleSI6IjB4NWVDNkFGMDc5OGIyNUM1NjNCMTAyZDM0Njk5NzFmMWE4ZDU5ODEyMSJ9",
@@ -7,19 +8,18 @@
   "baseBuilder": {
     "ownerAddress": "0x5eC6AF0798b25C563B102d3469971f1a8d598121"
   },
-  "version": "1",
   "miniapp": {
     "version": "1",
     "name": "Auditor",
     "homeUrl": "https://the-auditor.onrender.com",
-    "iconUrl": "https://the-auditor.onrender.com/assets/icon.png",
-    "heroImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
+    "iconUrl": "https://the-auditor.onrender.com/assets/icon.png",  // <-- new icon
     "splashImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
     "splashBackgroundColor": "#000000",
     "subtitle": "Farcaster growth terminal",
     "description": "Analyze your Farcaster and Base account and get posting recommendations.",
     "primaryCategory": "social",
     "tags": ["analytics", "farcaster", "growth"],
+    "heroImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
     "tagline": "Audit your Farcaster presence.",
     "ogTitle": "Auditor",
     "ogDescription": "Terminal-style analytics for your Farcaster profile.",
