@@ -447,22 +447,26 @@
   </main>
 
   <!-- Farcaster Mini App SDK: hide splash when UI is ready -->
-    <!-- Farcaster Mini App SDK (CDN version) -->
-  <script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/index.min.js"></script>
-  <script>
-    // সব কিছু লোড হয়ে গেলে ready() কল করি
-    window.addEventListener("load", async () => {
-      try {
-        if (window.frame && frame.sdk && frame.sdk.actions) {
-          await frame.sdk.actions.ready();
-        }
-      } catch (err) {
-        console.error("MiniApp SDK ready() failed", err);
-      }
-    });
-  </script>
+        <!-- Farcaster Mini App SDK (CDN version – required for Base App) -->
+    <script src="https://cdn.jsdelivr.net/npm/@farcaster/miniapp-sdk/dist/index.min.js"></script>
 
-  <script src="script.js"></script>
-</body>
+    <script>
+      window.addEventListener("load", async () => {
+        try {
+          if (window.frame?.sdk?.actions?.ready) {
+            await frame.sdk.actions.ready();
+            console.log("MiniApp READY fired ✔");
+          } else {
+            console.log("SDK not available yet ❌");
+          }
+        } catch (err) {
+          console.error("Error calling READY()", err);
+        }
+      });
+    </script>
+
+    <!-- your existing app script -->
+    <script src="script.js"></script>
+  </body>
 </html>
 
