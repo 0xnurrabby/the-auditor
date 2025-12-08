@@ -16,6 +16,7 @@
     "iconUrl": "https://the-auditor.onrender.com/assets/icon.png",
     "heroImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
     "splashImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
+    "splashBackgroundColor": "#000000",
     "subtitle": "Farcaster growth terminal",
     "description": "Analyze your Farcaster and Base account and get posting recommendations.",
     "primaryCategory": "social",
@@ -24,7 +25,7 @@
     "ogTitle": "Auditor",
     "ogDescription": "Terminal-style analytics for your Farcaster profile.",
     "ogImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
-    "splashBackgroundColor": "#000000"
+    "noindex": true
   }
 }
 
