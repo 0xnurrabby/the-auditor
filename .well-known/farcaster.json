@@ -10,24 +10,19 @@
   "miniapp": {
     "version": "1",
     "name": "The Auditor",
-    "homeUrl": "https://YOUR_DOMAIN_HERE",
-    "iconUrl": "https://YOUR_DOMAIN_HERE/assets/icon.png",
-    "splashImageUrl": "https://YOUR_DOMAIN_HERE/assets/hero.png",
+    "homeUrl": "https://the-auditor.onrender.com",
+    "iconUrl": "https://the-auditor.onrender.com/assets/icon.png",
+    "splashImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
     "splashBackgroundColor": "#000000",
-    "webhookUrl": "https://YOUR_DOMAIN_HERE/api/webhook",
     "subtitle": "Farcaster growth terminal",
-    "description": "Analyze your Farcaster account and get posting recommendations, best time to post, and hook performance.",
-    "screenshotUrls": [
-      "https://YOUR_DOMAIN_HERE/assets/screenshot-1.png",
-      "https://YOUR_DOMAIN_HERE/assets/screenshot-2.png"
-    ],
+    "description": "Analyze your Farcaster and Base account and get posting recommendations.",
     "primaryCategory": "social",
-    "tags": ["analytics", "farcaster", "growth", "miniapp"],
-    "heroImageUrl": "https://YOUR_DOMAIN_HERE/assets/hero.png",
+    "tags": ["analytics", "farcaster", "growth"],
+    "heroImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
     "tagline": "Audit your Farcaster presence.",
     "ogTitle": "The Auditor",
     "ogDescription": "Terminal-style analytics for your Farcaster profile.",
-    "ogImageUrl": "https://YOUR_DOMAIN_HERE/assets/hero.png",
+    "ogImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
     "noindex": true
   }
 }
