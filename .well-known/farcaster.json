@@ -28,7 +28,8 @@
   "ogTitle": "Auditor",
   "ogDescription": "Terminal-style analytics for your Farcaster profile.",
   "ogImageUrl": "https://the-auditor.onrender.com/assets/hero.png",
-  "noindex": true
+  "noindex": true,
+"webhookUrl": "https://the-auditor.onrender.com/api/webhook"
 }
 
 }
