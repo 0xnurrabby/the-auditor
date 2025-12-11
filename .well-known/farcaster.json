@@ -18,7 +18,8 @@
   "subtitle": "Farcaster growth terminal",
   "description": "Analyze your Farcaster and Base account and get posting recommendations.",
 "screenshotUrls": [
-      "https://the-auditor.onrender.com/screenshot-1.png"
+  "https://the-auditor.onrender.com/screenshot-1.png"
+],
   "primaryCategory": "social",
   "tags": [
     "analytics",
