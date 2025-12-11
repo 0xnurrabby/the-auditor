@@ -17,6 +17,8 @@
   "splashBackgroundColor": "#000000",
   "subtitle": "Farcaster growth terminal",
   "description": "Analyze your Farcaster and Base account and get posting recommendations.",
+"screenshotUrls": [
+      "https://base-kawaii.vercel.app/screenshot-1.png"
   "primaryCategory": "social",
   "tags": [
     "analytics",
