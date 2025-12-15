@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // --- Intro animation ---
   const introText =
-    "Initializing Farcaster Protocol... Tracking Influence... Ready.";
+    "Initializing Blue and Purple Protocol... Tracking Influence... Ready.";
   const typewriterElement = document.getElementById("typewriter");
   let i = 0;
 
